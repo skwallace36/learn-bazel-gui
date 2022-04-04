@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.BazelQueryTextArea{
+    box-sizing: border-box;
+    width: 100%;
+}
+.BazelQueryTextAreaContainer{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    
+}
+

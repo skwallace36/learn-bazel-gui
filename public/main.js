@@ -1,20 +1,25 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron');
+const spawn = require('child_process');
+const path = require("path");
+const fs = require("fs");
+
+let win;
 
 function createWindow () {
   // Create the browser window.
-  const win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: false,
+      contextIsolation: true, // protect against prototype pollution
+      enableRemoteModule: false, // turn off remote
+      preload: path.join(__dirname, "preload.js") // use a preload script
     }
   })
 
-  //load the index.html from a url
   win.loadURL('http://localhost:3000');
-
-  // Open the DevTools.
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished
@@ -39,6 +44,29 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+// const ls = spawn('ls', ['-lh', '/usr']);
+
+// ls.stdout.on('data', (data) => {
+//   console.log(`stdout: ${data}`);
+// });
+// 
+// ls.stderr.on('data', (data) => {
+//   console.error(`stderr: ${data}`);
+// });
+// 
+// ls.on('close', (code) => {
+//   console.log(`child process exited with code ${code}`);
+// });
+
+ipcMain.on("toMain", (event, args) => {
+  fs.readFile("path/to/file", (error, data) => {
+    // Do something with file contents
+    responseObj = "data222"
+    // Send result back to renderer process
+    win.webContents.send("fromMain", responseObj);
+  });
+});
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
