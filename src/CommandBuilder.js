@@ -2,7 +2,6 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 
-
 class CommandBuilder extends React.Component {
 	
 	commands = ["build", "run", "test", "query", "aquery", "cquery"];
@@ -12,7 +11,6 @@ class CommandBuilder extends React.Component {
 	}
 	
   render() {
-		
 		const commandsGrid = this.commands.map((command) =>
 	 		<Grid key={command} item>
 	   		<Paper>{command}</Paper>

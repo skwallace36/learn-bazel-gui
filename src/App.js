@@ -1,24 +1,31 @@
-import logo from './logo.svg';
 import CommandText from './CommandText';
 import CommandBuilder from './CommandBuilder';
-import Button from '@mui/material/Button';
+import CommandExecuter from './CommandExecuter';
+import React from 'react';
 
-
-function App() {
+class App extends React.Component {
   
-  function sayHello() {
-    alert('clicked');
-    window.api.send("toMain", "some data");
+  constructor(props) {
+    super(props);
+    this.state = {
+      command: "bazel build"
+    };
+  }
+     
+  handleCommandStateChange = (command) =>{
+      this.setState({command: command})
   }
   
-  return (<>
-    <CommandText command="bazel" />
-    <CommandBuilder />
-    <Button onClick={sayHello}>
-      button
-    </Button>
-  </>);
+  render() {
+    return (
+      <> 
+        <CommandText command={this.state.command} commandTextChanged={this.handleCommandStateChange} />
+        <CommandBuilder />
+        <CommandExecuter command={this.state.command} />
+      </>
+    );
+  }
 }
- 
 
 export default App;
+
