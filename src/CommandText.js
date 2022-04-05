@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 class CommandText extends React.Component {
   
   constructor(props) {

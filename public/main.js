@@ -49,12 +49,15 @@ app.on('activate', () => {
 
 
 ipcMain.on("toMain", (event, args) => {
-  console.log(args);
-  fs.readFile("path/to/file", (error, data) => {
-    responseObj = "data2555"
-    win.webContents.send("fromMain", responseObj);
-  });
+  console.log(`Received ${args} from renderer process`);
+  win.webContents.send("fromMain", args);
+  // fs.readFile("path/to/file", (error, data) => {
+  //   responseObj = "hello";
+  //   win.webContents.send("fromMain", responseObj);
+  // });
 });
+
+
 
 // ipcMain.on('request-mainprocess-action', (event, arg) => {
 //     console.log(arg);

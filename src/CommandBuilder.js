@@ -1,26 +1,41 @@
 import React from 'react';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
+import styled from 'styled-components';
+
+const BuilderButton = styled.button`
+	background-color: #43a047; /* Green */
+	border: none;
+	color: white;
+	padding: 8px 16px;
+	text-decoration: none;
+	border-radius: 4px;
+	&:hover {
+		background-color: #2d6c30;
+		text-decoration: none;
+		
+	}
+`;
+
+const FlexDiv = styled.div`
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+`;
 
 class CommandBuilder extends React.Component {
 	
 	commands = ["build", "run", "test", "query", "aquery", "cquery"];
 	
-	constructor(props) {
-		super(props);
-	}
-	
   render() {
+				
 		const commandsGrid = this.commands.map((command) =>
-	 		<Grid key={command} item>
-	   		<Paper>{command}</Paper>
-	 		</Grid>
+	   		<BuilderButton key={command} >{command}</BuilderButton>
 		);
+		
 		return (
 			<> 
-	  		<Grid container spacing={2}>
+	  		<FlexDiv>
 					{commandsGrid}
-	  		</Grid>	
+	  		</FlexDiv>	
 			</>
 		);
   }

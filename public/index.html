@@ -29,18 +29,14 @@
   <body>
     <div id="root"></div>
     <script>
+        // Called when message received from main process
         window.api.receive("fromMain", (data) => {
-            console.log(`Received ${data} from main process`);
+            return data;
         });
+        
+        // Send a message to the main process
+        // window.api.send("toMain", "some data");
     </script>
-    <!-- <script>
-        const { ipcRenderer } = require('electron');
-        let Data = {
-            message: "Hi",
-            someData: "Let's go"
-        };
-        ipcRenderer.send('request-mainprocess-action', Data);
-    </script> -->
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
